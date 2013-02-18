@@ -3,7 +3,24 @@ import sys
 from setuptools import setup
 
 version = sys.version_info[:2]
-install_requires = ['watchdog']
+install_requires = ['watchdog', 'termcolor']
+
+long_description = """
+requirements
+------------
+* Python 2.7
+
+Feature
+-------
+* "Sabun" is Simple, Easy and Awesome TODO Task Manager
+
+about detail.
+-------------
+see github.com_ :).
+
+.. _github.com: https://github.com/esehara/sabun
+"""
+
 
 if version < (2, 7) or (3, 0) <= version <= (3, 1):
     install_requires += ['argparse']
