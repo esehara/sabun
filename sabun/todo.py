@@ -10,11 +10,20 @@ class TODOManager(object):
         self.previous = None
         self.current = data
 
+    def is_valid(self, item):
+        if not item.strip():
+            return False
+
+        if item.lstrip()[0] == "#":
+            return False
+
+        return True
+
     def check_valid(self, diff):
         valid_diff = []
 
         for item in diff:
-            if item.strip():
+            if self.is_valid(item):
                 valid_diff.append(item)
 
         return valid_diff
