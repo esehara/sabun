@@ -6,7 +6,7 @@ import watcher
 
 def main():
     args = parse()
-    watcher.process(args.watchpath, args.outputpath)
+    watcher.process(args)
 
 
 def parse():
@@ -16,6 +16,8 @@ def parse():
         'watchpath', help="watch TODO file.")
     parser.add_argument(
         'outputpath', help="output Logging TODO diff.")
+    parser.add_argument(
+        '--color', action="store_true", help="logging terminal with color.")
 
     args = parser.parse_args()
     return args
