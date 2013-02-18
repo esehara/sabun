@@ -28,6 +28,7 @@ if version < (2, 7) or (3, 0) <= version <= (3, 1):
 setup(
     name="sabun",
     description="Easy and Simple TODO Task Logger",
+    long_description=long_description,
     version="0.1",
     license="MIT License",
     author="shigeo esehara",
