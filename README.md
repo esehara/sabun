@@ -52,6 +52,16 @@ Setup
 
 clone this repository and do "python setup.py install" :)
 
+Command
+-------
+
+        sabun WATCH_TODO_TEXT.txt OUTPUT_RECORD.txt
+
+Option
+------
+
+* --color : colorize logging :).
+
 License
 -------
 
