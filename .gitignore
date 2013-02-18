@@ -1,0 +1,7 @@
+TODO.txt
+dist
+.pytest-incremental
+*.pyc
+__pycache__
+build
+*.egg-info
