@@ -10,7 +10,20 @@ class TODOManager(object):
         self.previous = None
         self.current = data
 
+    def _include_check(self, item):
+
+        for check_item in self.current:
+            if item in check_item:
+                return True
+            elif check_item in item:
+                return True
+        return False
+
     def is_valid(self, item):
+
+        if self._include_check(item):
+            return False
+
         if not item.strip():
             return False
 

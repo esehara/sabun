@@ -65,3 +65,16 @@ class TestTODOManager:
         new_data = ['1', '3']
         manager.reload(new_data)
         assert not manager.has_change
+
+    def test_if_include_not_fix(self):
+        current = ['1', '2', '3']
+        manager = TODOManager(current)
+        new_data = ['1', 'A 2', '3']
+        manager.reload(new_data)
+        assert not manager.has_change
+
+        current = ['1', 'A 2', '3']
+        manager = TODOManager(current)
+        new_data = ['1', '2', '3']
+        manager.reload(new_data)
+        assert not manager.has_change
