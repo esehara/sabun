@@ -78,3 +78,10 @@ class TestTODOManager:
         new_data = ['1', '2', '3']
         manager.reload(new_data)
         assert not manager.has_change
+
+    def test_comment_out_is_not_pick(self):
+        current = ['1', '2', '3']
+        manager = TODOManager(current)
+        new_data = ['1', '# 2', '   #3']
+        manager.reload(new_data)
+        assert not manager.has_change
