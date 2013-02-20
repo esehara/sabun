@@ -17,10 +17,13 @@ class ChangeHandler(FileSystemEventHandler):
         self.output = console_args.outputpath
         self.is_color = console_args.color
         self.manager = TODOManager(open(self.watch).readlines())
+        self.debug = console_args.debug
 
     def on_modified(self, event):
         if self.watch == os.path.basename(event.src_path):
-            self.manager.reload(open(self.watch).readlines())
+            self.manager.reload(
+                open(self.watch).readlines(),
+                debug=self.debug)
 
             if self.manager.has_change:
                 for line in self.manager.deleted:

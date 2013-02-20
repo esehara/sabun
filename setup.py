@@ -29,7 +29,7 @@ setup(
     name="sabun",
     description="Easy and Simple TODO Task Logger",
     long_description=long_description,
-    version="0.1.1",
+    version="0.1.2",
     license="MIT License",
     author="shigeo esehara",
     author_email="esehara@gmail.com",

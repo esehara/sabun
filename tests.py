@@ -65,12 +65,19 @@ class TestTODOManager:
         manager.reload(new_data)
         assert manager.has_change
 
+    def test_whitespace_bug_fix(self):
         current = ['1', '', '2', '3']
         manager = TODOManager(current)
-        new_data = ['1','', '3']
+        new_data = ['1', '', '3']
         manager.reload(new_data)
         assert manager.has_change
-    
+
+        current = ['1', '', '2', '']
+        manager = TODOManager(current)
+        new_data = ['1', '']
+        manager.reload(new_data)
+        assert manager.has_change
+
     def test_prefix_not_logging(self):
         current = ['1', '#2', '3']
         manager = TODOManager(current)
