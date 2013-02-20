@@ -12,11 +12,19 @@ class TODOManager(object):
 
     def _include_check(self, item):
 
+        if len(item) < 1:
+            return False
+
         for check_item in self.current:
+
+            if len(check_item) < 1:
+                continue
+
             if item in check_item:
                 return True
             elif check_item in item:
                 return True
+
         return False
 
     def _comment_out_check(self, item):
@@ -47,7 +55,6 @@ class TODOManager(object):
         for item in diff:
             if self.is_valid(item):
                 valid_diff.append(item)
-
         return valid_diff
 
     def check_diff(self):
