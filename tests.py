@@ -59,6 +59,12 @@ class TestTODOManager:
         manager.reload(new_data)
         assert not manager.has_change
 
+        current = ['1', '  ', '2', '3']
+        manager = TODOManager(current)
+        new_data = ['1', '  ', '3']
+        manager.reload(new_data)
+        assert manager.has_change
+
     def test_prefix_not_logging(self):
         current = ['1', '#2', '3']
         manager = TODOManager(current)

@@ -21,7 +21,8 @@ class TODOManager(object):
 
     def _comment_out_check(self, item):
         for check_item in self.current:
-            if check_item.lstrip()[0] == "#":
+            ls_fix = check_item.lstrip()
+            if len(ls_fix) > 0 and check_item.lstrip()[0] == "#":
                 return check_item.lstrip()[0] in check_item
 
     def is_valid(self, item):
