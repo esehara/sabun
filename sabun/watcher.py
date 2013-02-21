@@ -3,6 +3,7 @@
 import time
 import datetime
 import os
+import sys
 from stat import ST_MTIME
 from termcolor import colored
 from todo import TODOManager
@@ -62,4 +63,4 @@ def process(console_args):
             event_handler.reload()
             time.sleep(1)
     except KeyboardInterrupt:
-        os.exit(0)
+        sys.exit(0)
