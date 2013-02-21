@@ -19,7 +19,13 @@ class ChangeHandler(FileSystemEventHandler):
         self.manager = TODOManager(open(self.watch).readlines())
         self.debug = console_args.debug
 
+    def on_created(self, event):
+        self._task(event)
+
     def on_modified(self, event):
+        self._task(event)
+
+    def _task(self, event):
         if self.watch == os.path.basename(event.src_path):
             self.manager.reload(
                 open(self.watch).readlines(),
@@ -45,6 +51,7 @@ class ChangeHandler(FileSystemEventHandler):
                     write_file = open(self.output, 'a')
                     write_file.write(log)
                     write_file.close()
+                self.manager.has_change = False
 
 
 def process(console_args):
