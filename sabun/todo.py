@@ -34,6 +34,7 @@ class TODOManager(object):
         return False
 
     def _comment_out_check(self, item):
+        item = item.lstrip()
         for check_item in self.current:
             ls_fix = check_item.lstrip()
             if len(ls_fix) > 0 and check_item.lstrip()[0] == "#":
