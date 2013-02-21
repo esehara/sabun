@@ -62,6 +62,7 @@ Option
 
 * --color : colorize logging :).
 * --debug : debug mode for developer.
+
 License
 -------
 
