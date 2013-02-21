@@ -10,6 +10,22 @@ class TestRunning:
 
 class TestTODOManager:
 
+    def _datadriven_assert(self, current, new_data, should):
+        manager = TODOManager(current)
+        manager.reload(new_data)
+        if should == "not change":
+            assert not manager.has_change
+        elif should == "has change":
+            assert manager.has_change
+        else:
+            assert not "has argument error "
+
+    def has_change(self, current, new_data):
+        self._datadriven_assert(current, new_data, 'has change')
+
+    def not_change(self, current, new_data):
+        self._datadriven_assert(current, new_data, 'not change')
+
     def test_current_to_previous(self):
 
         current = ('1', '2', '3')
@@ -32,18 +48,14 @@ class TestTODOManager:
         assert manager.has_change
 
     def test_add_is_not_check(self):
-        current = ['1', '2', '3']
-        manager = TODOManager(current)
-        new_data = ['1', '2', '3', '4']
-        manager.reload(new_data)
-        assert not manager.has_change
+        self.not_change(
+            ['1', '2', '3'],
+            ['1', '2', '3', '4'])
 
     def test_delete_check(self):
-        current = ['1', '2', '3']
-        manager = TODOManager(current)
-        new_data = ['1', '3']
-        manager.reload(new_data)
-        assert manager.has_change
+        self.has_change(
+            ['1', '2', '3'],
+            ['1', '3'])
 
     def test_get_delete_row(self):
         current = ['1', '2', '3']
@@ -53,66 +65,46 @@ class TestTODOManager:
         assert manager.deleted == ['2']
 
     def test_not_get_invalid_change(self):
-        current = ['1', '   ', '2', '3']
-        manager = TODOManager(current)
-        new_data = ['1', '2', '3']
-        manager.reload(new_data)
-        assert not manager.has_change
+        self.not_change(
+            ['1', '   ', '2', '3'],
+            ['1', '2', '3'])
 
-        current = ['1', '  ', '2', '3']
-        manager = TODOManager(current)
-        new_data = ['1', '  ', '3']
-        manager.reload(new_data)
-        assert manager.has_change
+        self.has_change(
+            ['1', '  ', '2', '3'],
+            ['1', '  ', '3'])
 
     def test_whitespace_bug_fix(self):
-        current = ['1', '', '2', '3']
-        manager = TODOManager(current)
-        new_data = ['1', '', '3']
-        manager.reload(new_data)
-        assert manager.has_change
+        self.has_change(
+            ['1', '', '2', '3'],
+            ['1', '', '3'])
 
-        current = ['1', '', '2', '']
-        manager = TODOManager(current)
-        new_data = ['1', '']
-        manager.reload(new_data)
-        assert manager.has_change
+        self.has_change(
+            ['1', '', '2', ''],
+            ['1', ''])
 
     def test_prefix_not_logging(self):
-        current = ['1', '#2', '3']
-        manager = TODOManager(current)
-        new_data = ['1', '3']
-        manager.reload(new_data)
-        assert not manager.has_change
+        self.not_change(
+            ['1', '#2', '3'],
+            ['1', '3'])
 
     def test_if_include_not_fix(self):
-        current = ['1', '2', '3']
-        manager = TODOManager(current)
-        new_data = ['1', 'A 2', '3']
-        manager.reload(new_data)
-        assert not manager.has_change
+        self.not_change(
+            ['1', '2', '3'],
+            ['1', 'A 2', '3'])
 
-        current = ['1', 'A 2', '3']
-        manager = TODOManager(current)
-        new_data = ['1', '2', '3']
-        manager.reload(new_data)
-        assert not manager.has_change
+        self.not_change(
+            ['1', 'A 2', '3'],
+            ['1', '2', '3'])
 
     def test_comment_out_is_not_pick(self):
-        current = ['1', '2', '3']
-        manager = TODOManager(current)
-        new_data = ['1', '# 2', '   #3']
-        manager.reload(new_data)
-        assert not manager.has_change
+        self.not_change(
+            ['1', '2', '3'],
+            ['1', '# 2', '   #3'])
 
-        current = ['1', '2', '3']
-        manager = TODOManager(current)
-        new_data = ['1', '# 2']
-        manager.reload(new_data)
-        assert manager.has_change
+        self.has_change(
+            ['1', '2', '3'],
+            ['1', '# 2'])
 
-        current = ['1', '  2', '3']
-        manager = TODOManager(current)
-        new_data = ['1', ' #2', '3']
-        manager.reload(new_data)
-        assert not manager.has_change
+        self.not_change(
+            ['1', '  2', '3'],
+            ['1', ' #2', '3'])
