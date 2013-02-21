@@ -3,7 +3,7 @@ import sys
 from setuptools import setup
 
 version = sys.version_info[:2]
-install_requires = ['watchdog', 'termcolor']
+install_requires = ['termcolor']
 
 long_description = """
 requirements
