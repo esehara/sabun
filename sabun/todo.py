@@ -37,7 +37,7 @@ class TODOManager(object):
         for check_item in self.current:
             ls_fix = check_item.lstrip()
             if len(ls_fix) > 0 and check_item.lstrip()[0] == "#":
-                return check_item.lstrip()[0] in check_item
+                return item in ls_fix
 
     def is_valid(self, item):
         self.dp('Check Item')
